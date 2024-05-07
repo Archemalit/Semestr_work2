@@ -13,25 +13,27 @@ class BinomialHeapNode {
         child = null;
     }
 
-    public BinomialHeapNode findMinNode() {
-        BinomialHeapNode x = this;
-        BinomialHeapNode y = this;
-        int min = x.key;
+    public BinomialHeapNode findMinimalNode() {
+        BinomialHeapNode first = this;
+        BinomialHeapNode second = this;
 
-        while (x != null) {
-            if (x.key < min) {
-                y = x;
-                min = x.key;
+        int min = first.key;
+
+        while (first != null) {
+            if (first.key < min) {
+                second = first;
+                min = first.key;
             }
 
-            x = x.sibling;
+            first = first.sibling;
         }
 
-        return y;
+        return second;
     }
 
     public BinomialHeapNode findANodeWithKey(int value) {
-        BinomialHeapNode temp = this, node = null;
+        BinomialHeapNode temp = this;
+        BinomialHeapNode node = null;
 
         while (temp != null) {
             if (temp.key == value) {
@@ -160,7 +162,7 @@ class BinomialHeap {
     }
 
     public int findMinimum() {
-        return nodes.findMinNode().key;
+        return nodes.findMinimalNode().key;
     }
 
     public void delete(int value) {
@@ -215,6 +217,5 @@ class BinomialHeap {
         merge(y.child);
 
         return min;
-
     }
 }

@@ -50,24 +50,6 @@ public class Main {
                 writter.write("\nСреднее время удаления минимального элемента:\n");
                 writter.write(averageTimeOfExtractMin + "");
 
-//                Random rd = new Random();
-
-//                List<Integer> deleteArray = new ArrayList<Integer>();
-//                while (deleteArray.size() < 4) {
-//
-//                    int random = rd.nextInt(1, 10000);
-//                    if (!deleteArray.contains(random)) {
-//                        deleteArray.add(random);
-//                    }
-//                }
-
-
-
-
-
-
-
-
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

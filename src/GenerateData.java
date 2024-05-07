@@ -12,11 +12,6 @@ public class GenerateData {
 
             int[] array = rd.ints(c_nums, 1, 100000000).toArray();
 
-//            int[] array = new int[c_nums];
-//            for (int i = 0; i < c_nums; i++) {
-//                array[i] = i + 1;
-//            }
-
             for (int j = 0; j < c_nums; j++) {
                 writter.write(array[j] + " ");
             }
