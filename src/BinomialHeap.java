@@ -60,6 +60,7 @@ class BinomialHeapNode {
 class BinomialHeap {
     private BinomialHeapNode nodes;
     private int size;
+    private int iterations = 0;
 
     public BinomialHeap() {
         nodes = null;
@@ -69,11 +70,11 @@ class BinomialHeap {
     public void insert(int value) {
 
         if (value > 0) {
-            BinomialHeapNode temp
-                    = new BinomialHeapNode(value);
+            BinomialHeapNode temp = new BinomialHeapNode(value);
             if (nodes == null) {
                 nodes = temp;
                 size = 1;
+                iterations++;
             } else {
                 unionNodes(temp);
                 size++;
@@ -105,6 +106,7 @@ class BinomialHeap {
             BinomialHeapNode tail = head;
 
             while (heap1Next != null && heap2Next != null) {
+                iterations++;
                 if (heap1Next.degree <= heap2Next.degree) {
                     tail.sibling = heap1Next;
                     heap1Next = heap1Next.sibling;
@@ -134,6 +136,7 @@ class BinomialHeap {
         BinomialHeapNode nextTemp = nodes.sibling;
 
         while (nextTemp != null) {
+            iterations++;
             if ((temp.degree != nextTemp.degree) || ((nextTemp.sibling != null) && (nextTemp.sibling.degree == temp.degree))) {
                 prevTemp = temp;
                 temp = nextTemp;
@@ -194,13 +197,14 @@ class BinomialHeap {
     public int extractMin() {
         BinomialHeapNode x = nodes;
         BinomialHeapNode y = nodes;
-        int min = x.key;
+        int minimal = x.key;
         BinomialHeapNode prev = null;
         BinomialHeapNode prevmin = null;
         while (x != null) {
-            if (x.key < min) {
+            iterations++;
+            if (x.key < minimal) {
                 y = x;
-                min = x.key;
+                minimal = x.key;
                 prevmin = prev;
 
             }
@@ -216,6 +220,12 @@ class BinomialHeap {
 
         merge(y.child);
 
-        return min;
+        return minimal;
+    }
+
+    public long getIterations() {
+        int temp = iterations;
+        iterations = 0;
+        return temp;
     }
 }

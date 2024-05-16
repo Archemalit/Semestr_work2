@@ -1,7 +1,4 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
@@ -17,6 +14,7 @@ public class Main {
                     array[i] = Integer.parseInt(reader.readLine());
                 }
                 long averageTimeOfInsert = 0;
+                long averageIterationsOfInsert = 0;
                 writter.write("Время добавления в наносекундах:\n");
                 for (int i = 0; i < n; i++) {
                     long start = System.nanoTime();
@@ -26,16 +24,24 @@ public class Main {
                     long end = System.nanoTime();
                     long time = end - start;
                     averageTimeOfInsert += time;
+                    averageIterationsOfInsert += binHeap.getIterations();
                     writter.write(time + " ");
                 }
                 averageTimeOfInsert = averageTimeOfInsert / n;
+                averageIterationsOfInsert = averageIterationsOfInsert / n;
 
                 writter.write("\nСреднее время добавления:\n");
                 writter.write(averageTimeOfInsert + "");
+
+                writter.write("\nСреднее кол-во итераций добавления:\n");
+                writter.write(averageIterationsOfInsert + "");
                 writter.write("\n");
 
                 writter.write("Время нахождения и удаления минимвльного элемента в наносекундах:\n");
+
                 long averageTimeOfExtractMin = 0;
+                long averageIterationsOfExtractMin = 0;
+
                 for (int i = 0; i < n / 10; i++) {
                     long start = System.nanoTime();
 
@@ -44,11 +50,17 @@ public class Main {
                     long end = System.nanoTime();
                     long time = end - start;
                     averageTimeOfExtractMin += time;
+                    averageIterationsOfExtractMin += binHeap.getIterations();
                     writter.write(time + " ");
                 }
                 averageTimeOfExtractMin = averageTimeOfExtractMin / (n / 10);
+                averageIterationsOfExtractMin = averageIterationsOfExtractMin / (n / 10);
+
                 writter.write("\nСреднее время удаления минимального элемента:\n");
                 writter.write(averageTimeOfExtractMin + "");
+
+                writter.write("\nСреднее кол-во операций удаления минимального элемента:\n");
+                writter.write(averageIterationsOfExtractMin + "");
 
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -56,7 +68,5 @@ public class Main {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-//        System.out.println(binHeap.());
     }
 }
